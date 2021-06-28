@@ -1,69 +1,95 @@
-<div class="col-md-6 offset-md-3">
-    <div class="card">
-        <div class="card-header">
-            <h2>Contactos</h2>
-        </div>
-        <div class="card-body">
-            {{#if contacts}}
-                <ul class="list-group">
-                    {{#each contacts}}
-                        <li class="list-group-item d-flex justify-content-between align-items-center ">
-                            {{firstname}}
-                            {{lastname}} /
-                            {{phone}} /
-                            {{email}}
-                            <a href="/delete-contact/{{@key}}" class="btn btn-danger">Eliminar</a>
-                        </li>
-                    {{/each}}
-                </ul>
-            {{else}}
-            <p>No exiten contactos en la base de datos</p>
-            {{/if}}
-        </div>
-        <div class="card-footer">
-            <form action="/new-contact" method="POST">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            <path fill-rule="evenodd"
-                                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                        </svg>
-                    </span>
-                    <input type="text" class="form-control" name="firstname" placeholder="Nombres" autofocus>
-                    <span class="input-group-text" id="basic-addon1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-exclamation-lg" viewBox="0 0 16 16">
-                            <path
-                                d="M6.002 14a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm.195-12.01a1.81 1.81 0 1 1 3.602 0l-.701 7.015a1.105 1.105 0 0 1-2.2 0l-.7-7.015z" />
-                        </svg>
-                    </span>
-                    <input type="text" class="form-control" name="lastname" placeholder="Apellidos">
-                </div>
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control" name="email" placeholder="Correo electronico">
-                    <label class="input-group-text" for="inputGroupSelect02">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
-                        </svg>
-                    </label>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                        </svg>
-                    </span>
-                    <input type="tel" class="form-control" name="phone" placeholder="Telefono">
-                </div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Agregar un nuevo contacto</h5>
+                <p class="card-text">Bienvenido al sistema de contactos, realizado con nodeJs y Firebase; sistema
+                    realizado por <a href="https://github.com/Meridadaniel316" target="_blank"><u>Daniel Castaño
+                            Merida</u></a> de <a href="https://www.sofka.com.co/es/sofka-university/"
+                        target="_blank">sofka-university</a></p>
+            </div>
+            <div class="card-body">
 
-                <button class="btn btn-success btn-block">Agregar</button>
-            </form>
+                <form action="/new-contact" method="POST">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                <path fill-rule="evenodd"
+                                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control" name="firstname" placeholder="Nombres" autofocus>
+                        <span class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-exclamation-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.002 14a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm.195-12.01a1.81 1.81 0 1 1 3.602 0l-.701 7.015a1.105 1.105 0 0 1-2.2 0l-.7-7.015z" />
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control" name="lastname" placeholder="Apellidos">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" name="email" placeholder="Correo electronico">
+                        <label class="input-group-text" for="inputGroupSelect02">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                            </svg>
+                        </label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg>
+                        </span>
+                        <input type="tel" class="form-control" name="phone" placeholder="Telefono">
+                    </div>
+
+                    <button class="btn btn-success btn-block">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="true" href="/">contactos</a>
+      </li>
+    </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Contactos:</h5>
+                {{#if contacts}}
+                {{#each contacts}}
+                <div class="card text-center mb-2">
+                    <div class="card-header">
+                      ID:  {{@key}}
+                    </div>
+                    <div class="card-body ">
+                        <h5 class="card-title">{{firstname}} {{lastname}}</h5>
+                        <p class="card-text">{{email}}</p>
+                        <p class="card-text">{{phone}}</p>
+                        <a href="/delete-contact/{{@key}}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{date}}
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <p class="card-text">No se hallaron contactos en la base de datos.</p>
+                <p class="card-text">Crea un nuevo contacto para continuar.</p>
+                {{/if}}
+            </div>
         </div>
     </div>
 </div>
