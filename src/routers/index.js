@@ -10,7 +10,11 @@ admin.initializeApp({
 const db = admin.database();
 
 router.get('/', (req, res) => {
-    res.render('index');
+    db.ref('contacts').once('value', (snapshot) => {
+        const data = snapshot.val();
+        res.render('index', { contacts: data});
+    });
+    
 });
 
 router.post('/new-contact', (req, res) => {
@@ -22,8 +26,10 @@ router.post('/new-contact', (req, res) => {
         phone: req.body.phone
     };
     db.ref('contacts').push(newContact);
-    res.send('received');
+    res.redirect('/');
 })
+
+
 
 module.exports = router;
 
