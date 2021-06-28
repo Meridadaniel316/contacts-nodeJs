@@ -29,7 +29,10 @@ router.post('/new-contact', (req, res) => {
     res.redirect('/');
 })
 
-
+router.get('/delete-contact/:id', (req, res) => {
+    db.ref('contacts/' + req.params.id).remove();
+    res.redirect('/');
+})
 
 module.exports = router;
 
