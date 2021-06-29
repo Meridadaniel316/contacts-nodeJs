@@ -21,26 +21,29 @@ router.get('/', (req, res) => {
 });
 
 router.post('/new-contact', [
-    body('firstname', 'Ingrese un nombre completo.')
+    body('firstname', 'Por favor ingrese un nombre valido. - Min: 3')
         .exists()
         .isLength({ min: 3 }),
-    body('lastname', 'Ingrese un apellido completo.')
+    body('lastname', 'Por favor ingrese un apellido valido. - Min: 3')
         .exists()
         .isLength({ min: 3 }),
-    body('email', 'Ingrese un E-mail válido.')
+    body('email', 'Por favor ingrese un E-mail válido')
         .exists()
         .isEmail(),
-    body('phone', 'ERROR: Ingrese un telefono válido.')
+    body('phone', 'Por favor ingrese un teléfono valido - Min: 7 (fijos) - Max: 10 (móvil)')
         .exists()
         .isNumeric()
+        .isLength({ min: 7, max: 10 }),
 ], (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        const valores = req.body
-        const validaciones = errors.array()
-        console.log(validaciones, valores)
-        res.redirect('/');
+        db.ref('contacts').once('value', (snapshot) => {
+            const valores = req.body
+            const data = snapshot.val();
+            const validaciones = errors.array()
+            res.render('index', {contacts: data, validaciones:validaciones, valores: valores})
+        });
+
     } else {
         const newContact = {
             firstname: req.body.firstname,
@@ -63,26 +66,45 @@ router.get('/delete-contact/:id', (req, res) => {
 router.get('/update/:id', ( req, res) =>{
     db.ref('contacts/' + req.params.id).once('value', (snapshot) => {
         let data = snapshot.val();
-        console.log(data)
         res.render('update', {contact: data, id: req.params.id}) 
     })
 })
 
-router.post('/update-update', (req, res) => {
-    
-    const contact = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        phone: req.body.phone
+router.post('/update-contact', [
+    body('firstname', 'Por favor ingrese un nombre valido. - Min: 3')
+        .exists()
+        .isLength({ min: 3 }),
+    body('lastname', 'Por favor ingrese un apellido valido. - Min: 3')
+        .exists()
+        .isLength({ min: 3 }),
+    body('email', 'Por favor ingrese un E-mail válido')
+        .exists()
+        .isEmail(),
+    body('phone', 'Por favor ingrese un teléfono valido - Min: 7 (fijos) - Max: 10 (móvil)')
+        .exists()
+        .isNumeric()
+        .isLength({ min: 7, max: 10 }),
+], (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        db.ref('contacts').once('value', (snapshot) => {
+            const valores = req.body
+            const data = snapshot.val();
+            const validaciones = errors.array()
+            res.render('update', {contacts: data, validaciones:validaciones, valores: valores})
+        });
+    } else {
+        const contact = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            phone: req.body.phone
+        }
+        const id = {id: req.body.id}
+        db.ref('contacts/' + id.id).update(contact);
+        res.redirect('/');
     }
-
-    const id = {id: req.body.id}
-
-    console.log(id.id)
     
-    db.ref('contacts/' + id.id).update(contact);
-    res.redirect('/');
 });
 
 

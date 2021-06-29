@@ -3,9 +3,9 @@
         <a href="" style="font-weight: bold; color:antiquewhite">ACTUALIZAR UN CONTACTO</a>
     </div>
     <div class="card-body">
-        <form action="/update-update" method="POST">
+        <form action="/update-contact" method="POST">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="id" id="id" value={{id}} readonly>
+                <input type="text" class="form-control" name="id" id="id" value="{{#if valores }}{{valores.id}}{{else}}{{id}}{{/if}}" readonly>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">
@@ -16,8 +16,8 @@
                             d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
                     </svg>
                 </span>
-                <input type="text" class="form-control" name="firstname" id="firstname" value={{contact.firstname}}
-                    placeholder="Nombres" value="" autofocus required>
+                <input type="text" class="form-control" name="firstname" id="firstname" value="{{#if valores }}{{valores.firstname}}{{else}}{{contact.firstname}}{{/if}}"
+                    placeholder="Nombres" value="">
                 <span class="input-group-text" id="basic-addon1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-exclamation-lg" viewBox="0 0 16 16">
@@ -25,11 +25,11 @@
                             d="M6.002 14a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm.195-12.01a1.81 1.81 0 1 1 3.602 0l-.701 7.015a1.105 1.105 0 0 1-2.2 0l-.7-7.015z" />
                     </svg>
                 </span>
-                <input type="text" class="form-control" name="lastname" id="lastname" value={{contact.lastname}}
+                <input type="text" class="form-control" name="lastname" id="lastname" value="{{#if valores }}{{valores.lastname}}{{else}}{{contact.lastname}}{{/if}}"
                     placeholder="Apellidos" required>
             </div>
             <div class="input-group mb-3">
-                <input type="email" class="form-control" name="email" id="email" value={{contact.email}}
+                <input type="email" class="form-control" name="email" id="email" value="{{#if valores }}{{valores.email}}{{else}}{{contact.email}}{{/if}}"
                     placeholder="Correo electronico" required>
                 <label class="input-group-text" for="inputGroupSelect02">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -47,7 +47,7 @@
                             d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
                     </svg>
                 </span>
-                <input type="tel" class="form-control" name="phone" id="phone" value={{contact.phone}}
+                <input type="tel" class="form-control" name="phone" id="phone" value="{{#if valores }}{{valores.phone}}{{else}}{{contact.phone}}{{/if}}"
                     placeholder="Telefono">
             </div>
             <button class="btn btn-info">Actualizar</button>
