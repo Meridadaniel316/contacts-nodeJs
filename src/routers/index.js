@@ -60,5 +60,31 @@ router.get('/delete-contact/:id', (req, res) => {
     res.redirect('/');
 })
 
+router.get('/update/:id', ( req, res) =>{
+    db.ref('contacts/' + req.params.id).once('value', (snapshot) => {
+        let data = snapshot.val();
+        console.log(data)
+        res.render('update', {contact: data, id: req.params.id}) 
+    })
+})
+
+router.post('/update-update', (req, res) => {
+    
+    const contact = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        phone: req.body.phone
+    }
+
+    const id = {id: req.body.id}
+
+    console.log(id.id)
+    
+    db.ref('contacts/' + id.id).update(contact);
+    res.redirect('/');
+});
+
+
 module.exports = router;
 
