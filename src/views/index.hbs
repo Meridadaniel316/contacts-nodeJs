@@ -113,16 +113,21 @@
         <div class="card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
+                    {{#if contacts}}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="true" href="/">contactos</a>
                     </li>
+                    {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="true" href="/">Error</a>
+                    </li>
+                    {{/if}}
                 </ul>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Contactos:</h5>
-
                 {{#if contacts}}
                 {{#each contacts}}
+                <h5 class="card-title">Contactos:</h5>
                 <div class="card text-center mb-2">
                     <div class="card-header">
                         ID: {{@key}}
@@ -153,7 +158,7 @@
                 </div>
                 {{/each}}
                 {{else}}
-                <p class="card-text">No se hallaron contactos en la base de datos.</p>
+                <h5 class="card-title">No se hallaron contactos en la base de datos:</h5>
                 <p class="card-text">Crea un nuevo contacto para continuar.</p>
                 {{/if}}
             </div>
