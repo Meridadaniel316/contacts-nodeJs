@@ -1,11 +1,10 @@
 #logo{
     background-color: black;
-    margin: right;
     margin-top: 490px;
     width: 160px;
     height: 100px;
     position: fixed;
     z-index: 1000px;
     text-decoration: none;
-    opacity: 95%;
+    opacity: 70%;
   }

@@ -12,6 +12,7 @@ admin.initializeApp({
 
 const db = admin.database();
 
+  
 router.get('/', (req, res) => {
     db.ref('contacts').once('value', (snapshot) => {
         const data = snapshot.val();
@@ -20,23 +21,25 @@ router.get('/', (req, res) => {
 });
 
 router.post('/new-contact', [
-    body('firstname', 'Ingrese un nombre completo')
+    body('firstname', 'Ingrese un nombre completo.')
         .exists()
-        .isLength({ min: 5 }),
-    body('lastname', 'Ingrese un apellido completo')
+        .isLength({ min: 3 }),
+    body('lastname', 'Ingrese un apellido completo.')
         .exists()
-        .isLength({ min: 5 }),
-    body('email', 'Ingrese un E-mail válido')
+        .isLength({ min: 3 }),
+    body('email', 'Ingrese un E-mail válido.')
         .exists()
         .isEmail(),
-    body('phone', 'Ingrese un valor numérico')
+    body('phone', 'ERROR: Ingrese un telefono válido.')
         .exists()
         .isNumeric()
 ], (req, res) => {
     console.log(req.body);
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        console.log(req.body)
+        const valores = req.body
+        const validaciones = errors.array()
+        console.log(validaciones, valores)
         res.redirect('/');
     } else {
         const newContact = {
